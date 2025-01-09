@@ -68,8 +68,8 @@ The goal of this project is to design tables to store CSV data, import data into
 
 ### 1. **Prerequisites**
 Ensure you have the following tools installed:
-- PostgreSQL or MySQL
-- SQL client (e.g., pgAdmin, MySQL Workbench, or command-line interface)
+- PostgreSQL
+- pgAdmin
 
 ### 2. **Steps to Reproduce**
 
@@ -80,39 +80,33 @@ $ cd sql-challenge
 ```
 
 #### b. Create the Database and Tables
-1. Open your SQL client and connect to your database server.
+1. Open pgAdmin and connect to your PostgreSQL server.
 2. Create a new database (e.g., `pewlett_hackard`):
-   ```sql
-   CREATE DATABASE pewlett_hackard;
-   ```
-3. Run the `table_schemata.sql` script to create the tables:
-   ```bash
-   psql -d pewlett_hackard -f table_schemata.sql
-   ```
+   - In the Object Browser, right-click on `Databases` and select `Create` > `Database`.
+   - Enter the name `pewlett_hackard` and click `Save`.
+3. Open the Query Tool in pgAdmin.
+4. Run the `table_schemata.sql` script to create the tables:
+   - Click the folder icon to load the script or copy-paste its content into the Query Tool.
+   - Execute the script using the play button.
 
 #### c. Import CSV Data
-Use your SQL client or command-line tool to import data into each table. For example:
-```sql
-COPY employees FROM '/path/to/employees.csv' DELIMITER ',' CSV HEADER;
-COPY salaries FROM '/path/to/salaries.csv' DELIMITER ',' CSV HEADER;
--- Repeat for other tables
-```
+1. **Import Order:**
+   - Start by importing `titles.csv` as it provides job titles linked to employees.
+   - Next, import `employees.csv` and `departments.csv` to populate employee details and department information.
+   - Finally, import the remaining files in this order: `salaries.csv`, `dept_emp.csv`, and `dept_manager.csv`.
+2. **Steps to Import in pgAdmin:**
+   - Right-click on each table in the Object Browser and select `Import/Export Data`.
+   - In the Import/Export Data dialog:
+     - Select `Import` as the operation.
+     - Choose the corresponding CSV file from the `data/` folder.
+     - Check the box for `Header` to ensure column headers are skipped.
+     - Match the columns in the CSV file to the table columns.
+     - Click `OK` to import the data.
 
 #### d. Run Analysis Queries
-1. Execute the queries in `queries.sql` to retrieve analysis results.
-2. Example:
-   ```sql
-   SELECT emp_no, last_name, first_name, sex, salary FROM employees;
-   ```
-
----
-
-## Results
-The analyses reveal key insights about the company's employees, such as:
-- Employee demographics and salaries.
-- Hiring trends in 1986.
-- Department structures and manager details.
-- Popular last names and employee distributions across departments.
+1. Open the Query Tool in pgAdmin.
+2. Load or copy-paste the queries from `queries.sql`.
+3. Execute the queries using the play button to retrieve analysis results.
 
 ---
 
